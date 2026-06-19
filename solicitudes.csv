@@ -1,0 +1,2 @@
+id_solicitud,legajo,nombre,fecha_inicio,fecha_fin,dias_solicitados,estado,motivo,fecha_registro
+1001,Juan Perez,2003-05-12,2003-05-24,13,RECHAZADA,"fechas ocupadas: ['2003-05-12', '2003-05-13', '2003-05-14', '2003-05-15', '2003-05-16', '2003-05-17', '2003-05-18', '2003-05-19', '2003-05-20', '2003-05-21', '2003-05-22', '2003-05-23', '2003-05-24']",2026-06-19 15:40
