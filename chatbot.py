@@ -64,14 +64,14 @@ def main():
             if not empleado:
                 print("🤖 No te encontré. Probá de nuevo.")
                 continue
-            print(f"🤖 Hola {empleado['nombre']}, tu saldo es {empleado['saldo_dias']} dias.")
+            print(f"🤖 Hola {empleado['nombre']}, tu saldo es {empleado['saldo_dias']} días.")
             estado = Estado.FECHA_INICIO
 
         elif estado == Estado.FECHA_INICIO:
             texto = input("🤖 Fecha de inicio (AAAA-MM-DD):\n👤 ")
             inicio = validar_fecha(texto)
             if not inicio:
-                print("🤖 Formato invalido. Usa AAAA-MM-DD.")
+                print("🤖 Formato inválido. Usá AAAA-MM-DD.")
                 continue
             estado = Estado.FECHA_FIN
 
@@ -90,7 +90,7 @@ def main():
             if len(dias) > int(empleado["saldo_dias"]):
                 registrar_solicitud(legajo, empleado["nombre"], inicio, fin, len(dias),
                                     "RECHAZADA", "saldo insuficiente")
-                print("🤖 Solicitud RECHAZADA: no tenes suficientes dias.")
+                print("🤖 Solicitud RECHAZADA: no tienes suficientes días.")
                 estado = Estado.FIN
                 continue
 
@@ -111,7 +111,7 @@ def main():
             guardar_calendario(calendario)
             registrar_solicitud(legajo, empleado["nombre"], inicio, fin, len(dias),
                                 "APROBADA", "ok")
-            print(f"🤖 Solicitud APROBADA. Saldo restante: {empleado['saldo_dias']} dias.")
+            print(f"🤖 Solicitud APROBADA. Saldo restante: {empleado['saldo_dias']} días.")
             estado = Estado.FIN
 
 if __name__ == "__main__":
