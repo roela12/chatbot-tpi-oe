@@ -1,7 +1,12 @@
 import csv
 from datetime import datetime, timedelta
 from enum import Enum, auto
+import os
 
+# ---------- Arreglo de rutas ----------
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+def ruta(nombre_archivo):
+    return os.path.join(BASE_DIR, nombre_archivo)
 # ---------- Máquina de estados ----------
 class Estado(Enum):
     LEGAJO = auto()
@@ -16,21 +21,21 @@ def cargar_csv(archivo):
         return list(csv.DictReader(f))
 
 def guardar_empleados(empleados):
-    with open("empleados.csv", "w", newline="", encoding="utf-8") as f:
+    with open(ruta("empleados.csv"), "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         w.writerow(["legajo", "nombre", "saldo_dias"])
         for e in empleados:
             w.writerow([e["legajo"], e["nombre"], e["saldo_dias"]])
 
 def guardar_calendario(calendario):
-    with open("calendario.csv", "w", newline="", encoding="utf-8") as f:
+    with open(ruta("calendario.csv"), "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         w.writerow(["fecha", "disponible"])
         for fecha, disp in calendario.items():
             w.writerow([fecha, disp])
 
 def registrar_solicitud(legajo, nombre, inicio, fin, dias, estado, motivo):
-    with open("solicitudes.csv", "a", newline="", encoding="utf-8") as f:
+    with open(ruta("solicitudes.csv"), "a", newline="", encoding="utf-8") as f:
         csv.writer(f).writerow([legajo, nombre, inicio, fin, dias, estado,
                                  motivo, datetime.now().strftime("%Y-%m-%d %H:%M")])
 
@@ -47,8 +52,8 @@ def rango_fechas(inicio, fin):
 
 # ---------- Bot principal: recorre la máquina de estados ----------
 def main():
-    empleados = cargar_csv("empleados.csv")
-    calendario = {f["fecha"]: f["disponible"] for f in cargar_csv("calendario.csv")}
+    empleados = cargar_csv(ruta("empleados.csv"))
+    calendario = {f["fecha"]: f["disponible"] for f in cargar_csv(ruta("calendario.csv"))}
 
     estado = Estado.LEGAJO
     empleado, legajo, inicio, fin = None, None, None, None
